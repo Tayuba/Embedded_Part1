@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;0LED_Tpggele.c&apos; to &apos;001HelloWorld&apos;" description="Move &apos;0LED_Tpggele.c&apos; to &apos;001HelloWorld&apos;" destination="/001HelloWorld" element1="/stm32f4xx_drivers/Src/0LED_Tpggele.c" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1734150314331" updateReferences="true"/>
+</session>
