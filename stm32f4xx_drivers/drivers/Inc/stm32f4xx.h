@@ -15,7 +15,40 @@
 
 
 
+/*************************************************************************************************************************************************
+											PROCESSOR DETAILS, FOR NVIC ISERx AND ICERx REGISTER ADDRESSES
+***************************************************************************************************************************************************/
+//NVIC ISERx REGISTER ADDRESSES
+#define NVIC_ISERO				((__vo uint32_t *)0xE000E100)
+#define NVIC_ISER1				((__vo uint32_t *)0xE000E104)
+#define NVIC_ISER2				((__vo uint32_t *)0xE000E108)
 
+//ICERx REGISTER ADDRESSES
+#define NVIC_ICERO				((__vo uint32_t *)0XE000E180)
+#define NVIC_ICER1				((__vo uint32_t *)0XE000E184)
+#define NVIC_ICER2				((__vo uint32_t *)0XE000E188)
+
+//IPR REGISTER ADDRESSES
+#define NVIC_IPR_BASE_ADDR		((__vo uint32_t *)0xE000E400)
+
+
+//NVIC Priority Macros
+#define NVIC_IRQ_PRIORITY_0				0
+#define NVIC_IRQ_PRIORITY_1				1
+#define NVIC_IRQ_PRIORITY_2				2
+#define NVIC_IRQ_PRIORITY_3				3
+#define NVIC_IRQ_PRIORITY_4				4
+#define NVIC_IRQ_PRIORITY_5				5
+#define NVIC_IRQ_PRIORITY_6				6
+#define NVIC_IRQ_PRIORITY_7				7
+#define NVIC_IRQ_PRIORITY_8				8
+#define NVIC_IRQ_PRIORITY_9				9
+#define NVIC_IRQ_PRIORITY_10			10
+#define NVIC_IRQ_PRIORITY_11			11
+#define NVIC_IRQ_PRIORITY_12			12
+#define NVIC_IRQ_PRIORITY_13			13
+#define GNVIC_IRQ_PRIORITY_14			14
+#define NVIC_IRQ_PRIORITY_15			15
 
 /*
  * Base Addresses of Flash and SRAM Memories
@@ -178,6 +211,58 @@ typedef struct{
 #define RCC 		((RCC_Reg_t *)RCC_BASEADDR)
 
 
+//EXTI Peripheral definitions
+#define EXTI 		((EXTI_Reg_t *)EXTI_BASEADDR)
+
+
+/*Register Peripherals of EXTI*/
+typedef struct{
+	__vo uint32_t IMR; 													// Interrupt mask register
+	__vo uint32_t EMR;													// Event mask register
+	__vo uint32_t RTSR;													// Rising trigger selection register
+	__vo uint32_t FTSR;													// Falling trigger selection register
+	__vo uint32_t SWIER;												// Software interrupt event register
+	__vo uint32_t PR;													// Pending register
+}EXTI_Reg_t;
+
+//SYSCFG Peripheral definitions
+#define SYSCFG 		((SYSCFG_Reg_t *)SYSCFG_BASEADDR)
+
+/*Register Peripherals of SYSCFG*/
+typedef struct{
+	__vo uint32_t MEMRMP;
+	__vo uint32_t PMC;
+	__vo uint32_t EXTICR[4];
+     uint32_t RESERVED[2];
+	__vo uint32_t CMPCR;
+
+}SYSCFG_Reg_t;
+
+
+// GPIO base to Port Code Macro
+#define GPIO_BASE_TO_PORTCODE(x)		((x == GPIOA)?  0:\
+										(x ==  GPIOB) ? 1:\
+										(x ==  GPIOC) ? 2:\
+										(x ==  GPIOD) ? 3:\
+										(x ==  GPIOE) ? 4:0)
+
+
+// Interrupt Request (IRQ) Number For GPIO
+#define IRQ_EXTI0						6
+#define IRQ_EXTI1						7
+#define IRQ_EXTI2						8
+#define IRQ_EXTI3						9
+#define IRQ_EXTI4						10
+#define IRQ_EXTI9_5						23
+#define IRQ_EXTI15_10					40
+
+// Interrupt Request (IRQ) Number For SPI
+#define IRQ_SPI1						32
+#define IRQ_SPI2						36
+#define IRQ_SPI3						51
+
+// Priority amount to be shifted in STM32F407
+#define STM32F407_PR_BIT_IMPLEMENTED	4
 
 
 /*
@@ -213,8 +298,6 @@ typedef struct{
 
 
 
-
-
 /*
  * DISABLE CLOCK FOR VARIOUS PERIPHERALS
  * */
@@ -245,8 +328,6 @@ typedef struct{
 
 //MACRO SYSCFG PERIPHERALS DISABLE
 #define SYSCFG_PCLK_DI()	(RCC->APB2ENR &= ~(1 << 14))
-
-
 
 
 
